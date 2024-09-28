@@ -91,7 +91,7 @@ export class Imgsed implements IGetPost, IGetPosts, IGetComments, IGetStories, I
 	async getPost(shortcode: string): Promise<Post> {
 		const html = await this.scraper.getHtml({ path: `p/${shortcode}/` });
 		const $ = cheerio.load(html);
-		const isVideo = $(".media-video").data("src") ? true : false;
+		const isVideo = $(".media-wrap.proxy-video").html()!==null;
 
 		const post: Post = {
 			id: shortcodeToMediaId(shortcode),
@@ -176,7 +176,7 @@ export class Imgsed implements IGetPost, IGetPosts, IGetComments, IGetStories, I
 		$(".comment").each((_i, comment) => {
 			const $comment = $(comment);
 			comments?.push({
-				username: $comment.find(".con>h2>a").text().trim(),
+				username: $comment.find(".con>a").first().text().trim(),
 				avatar: proxyUrl(convertToInstagramUrl($comment.find("img").data("src") as string)),
 				comment: $comment.find(".con>p").text(),
 			});

@@ -41,11 +41,11 @@ export class Wizstat implements IGetProfile, IGetPost, IGetPosts, IGetComments {
 	constructor(private scraper: AxiosScraper | PlaywrightScraper) {}
 
 	private async scrapePosts(username: string): Promise<PostsResponse> {
-		const html = await this.scraper.getHtml({ path: `${username}/` });
+		const html = await this.scraper.getHtml({ path: `${username}/` }); //blocked by cloudflare 
 		const $ = cheerio.load(html);
 		const posts: Post[] = [];
 
-		$(".post-items>.post-item").each((_i, post) => {
+		$(".items>.item").each((_i, post) => {
 			const img = $(post).find("img");
 
 			const shortcode = $(post).find(".img").attr("href")?.slice(3, -1) as string;

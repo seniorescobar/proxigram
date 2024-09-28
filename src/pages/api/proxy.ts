@@ -9,6 +9,7 @@ const SERVICESRGX = [
 	/^https?:\/\/(?:.*\.)?(?:cdninstagram\.com|fbcdn\.net|instagram\.fmci2-1\.fna\.fbcdn\.net)\/.*/,
 	/https:\/\/cdn\d+\.([a-zA-Z0-9-]+\.)+[a-zA-Z]+\/v1\/[a-zA-Z0-9]+\.(jpg|png|gif|mp4)/,
 	/^https?:\/\/([a-zA-Z\d-]+\.)?[a-zA-Z\d-]+\.[a-zA-Z]{2,6}\/U2FsdGVkX[a-zA-Z\d-%]*$/,
+	new RegExp("https://s[0-9].imginn.com"),
 ];
 
 const getCleanReqHeaders = (headers: NextApiRequest["headers"]) => ({
